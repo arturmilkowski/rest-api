@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Illuminate\Database\Eloquent\Collection;
-use App\Models\Book;
+use App\Models\{User, Book};
 
 class BookTest extends TestCase
 {
@@ -33,8 +33,13 @@ class BookTest extends TestCase
      */
     public function testBookBelongsToManyUsers(): void
     {
-        $book = Book::factory()->create();
+        // $book = Book::factory()->create();
+        $books = Book::factory()->count(3)->create();
+        $user = User::factory()
+            ->count(3)
+            ->hasAttached($books)
+            ->create();
         
-        $this->assertInstanceOf(Collection::class, $book->users);
+        $this->assertInstanceOf(Collection::class, $books[0]->users);
     }
 }
