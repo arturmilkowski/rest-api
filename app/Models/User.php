@@ -18,7 +18,9 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'slug',
+        'firstname',
+        'lastname',
         'email',
         'password',
     ];
@@ -41,4 +43,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+    * The roles that belong to the user.
+    */
+    public function books()
+    {
+        return $this->belongsToMany(Book::class);
+    }
 }

@@ -6,24 +6,36 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
+use App\Models\{User, Book};
 
 class ExampleTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
-     * A basic test example.
+     * Create instance of User Model test.
      *
      * @return void
      */
     public function testUserCanBeInstantiated(): void
     {
-        // $response = $this->get('/');
-        // $response->assertStatus(200);
-        
         $user = User::factory()->make();
-        dd($user);
+        
         $this->assertInstanceOf(User::class, $user);
+    }
+
+    /**
+     * User has many books test.
+     *
+     * @return void
+     */
+    public function testUserHasManyBooks(): void
+    {
+        $user = User::factory()
+            ->has(Book::factory()->count(3))
+            ->create();
+        
+        $this->assertInstanceOf(Collection::class, $user->books);
     }
 }
