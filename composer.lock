@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cfcde05a035f7429a0417c34604c1bd1",
+    "content-hash": "ce8ca9e110a4c42da1b8717522f7974b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -799,32 +799,29 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.0.0",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "1dc8d9cba3897165e16d12bb13d813afb1eb3fe7"
+                "reference": "dc960a912984efb74d0a90222870c72c87f10c91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/1dc8d9cba3897165e16d12bb13d813afb1eb3fe7",
-                "reference": "1dc8d9cba3897165e16d12bb13d813afb1eb3fe7",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/dc960a912984efb74d0a90222870c72c87f10c91",
+                "reference": "dc960a912984efb74d0a90222870c72c87f10c91",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2.5 || ^8.0",
-                "psr/http-factory": "^1.0",
-                "psr/http-message": "^1.0",
-                "ralouphie/getallheaders": "^3.0"
+                "php": ">=5.4.0",
+                "psr/http-message": "~1.0",
+                "ralouphie/getallheaders": "^2.0.5 || ^3.0.0"
             },
             "provide": {
-                "psr/http-factory-implementation": "1.0",
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.4.1",
-                "http-interop/http-factory-tests": "^0.9",
-                "phpunit/phpunit": "^8.5.8 || ^9.3.10"
+                "ext-zlib": "*",
+                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.10"
             },
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
@@ -832,13 +829,16 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
                     "GuzzleHttp\\Psr7\\": "src/"
-                }
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -853,11 +853,6 @@
                 {
                     "name": "Tobias Schultze",
                     "homepage": "https://github.com/Tobion"
-                },
-                {
-                    "name": "Márk Sági-Kazár",
-                    "email": "mark.sagikazar@gmail.com",
-                    "homepage": "https://sagikazarmark.hu"
                 }
             ],
             "description": "PSR-7 message implementation that also provides common utility methods",
@@ -873,9 +868,9 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.0.0"
+                "source": "https://github.com/guzzle/psr7/tree/1.8.2"
             },
-            "time": "2021-06-30T20:03:07+00:00"
+            "time": "2021-04-26T09:17:50+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2704,6 +2699,71 @@
                 }
             ],
             "time": "2021-08-11T01:06:55+00:00"
+        },
+        {
+            "name": "smsapi/php-client",
+            "version": "v3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smsapi/smsapi-php-client.git",
+                "reference": "762a7fd977a1ad0d57e802e71ff21ac6abaf0e89"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smsapi/smsapi-php-client/zipball/762a7fd977a1ad0d57e802e71ff21ac6abaf0e89",
+                "reference": "762a7fd977a1ad0d57e802e71ff21ac6abaf0e89",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7 || ^8.0",
+                "psr/http-client": "^1",
+                "psr/http-factory": "^1",
+                "psr/http-message": "^1",
+                "psr/log": "^1"
+            },
+            "require-dev": {
+                "doctrine/instantiator": "1.0.5 || ^1.4.0",
+                "ext-curl": "*",
+                "ext-mbstring": "*",
+                "guzzlehttp/psr7": "^1",
+                "phpdocumentor/reflection-docblock": "^4.3 || ^5.2.0",
+                "phpdocumentor/type-resolver": "^0.5 || ^1.3.0",
+                "phpunit/phpunit": "^6 || ^8",
+                "symfony/yaml": "^3"
+            },
+            "suggest": {
+                "ext-curl": "To use Curl HttpClient",
+                "guzzlehttp/psr7": "To use Curl HttpClient and HTTP message factories"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Smsapi\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "SMSAPI API PHP Client",
+            "homepage": "https://github.com/smsapi/smsapi-php-client",
+            "keywords": [
+                "api client",
+                "hlr",
+                "mms",
+                "sms",
+                "smsapi",
+                "smsapi.com",
+                "smsapi.pl",
+                "url shortener",
+                "vms"
+            ],
+            "support": {
+                "issues": "https://github.com/smsapi/smsapi-php-client/issues",
+                "source": "https://github.com/smsapi/smsapi-php-client/tree/v3.0.3"
+            },
+            "time": "2021-07-21T12:06:02+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
