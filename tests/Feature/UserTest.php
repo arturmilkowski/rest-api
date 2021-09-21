@@ -55,7 +55,6 @@ class ExampleTest extends TestCase
         $response = $this->getJson(route('users.index'));
 
         $response->assertStatus(200);
-        // $response->dump();
     }
 
     /**
@@ -71,7 +70,6 @@ class ExampleTest extends TestCase
         $user->makeVisible(['password']);
         $response = $this->postJson(route('users.store'), $user->toArray());
         
-        // $response->dump();
         $user->makeHidden(['password']); 
         $response
             ->assertStatus(201)
@@ -102,7 +100,6 @@ class ExampleTest extends TestCase
         $response = $this->getJson(route('users.show', $user));
 
         $response->assertStatus(200);
-        // $response->dump();
         $response->assertJson(
             [
                 'data' => [

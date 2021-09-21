@@ -91,13 +91,13 @@ class UserController extends Controller
     public function destroy(User $user): JsonResponse
     {
         $deleted = $user->delete();
-        
+        /*
         $smsApi = new SmsApi();
         $smsApi->sendSms(
             $phoneNumber = '505891315', // $user->phoneNumber
             $msg = 'You have been removed from test application.'
         );
-
+        */
         return response()->json(['data' => ['deleted'  => $deleted]], 200);
     }
 }
