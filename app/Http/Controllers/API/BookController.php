@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -92,5 +93,25 @@ class BookController extends Controller
         $deleted = $book->delete();
         
         return response()->json(['data' => ['deleted'  => $deleted]], 200);
+    }
+
+    /**
+     * Search books.
+     *
+     * @param Request $request Request
+     * 
+     * @return BookResource
+     */
+    public function search(Request $request): BookResource
+    {
+        $searchedPhrase = $request->get('s');
+        
+        $books = DB::table('books')
+            ->where('title', 'like', "%{$searchedPhrase}%")
+            ->orWhere('short_description', 'like', "%{$searchedPhrase}%")
+            ->orWhere('description', 'like', "%{$searchedPhrase}%")
+            ->get();
+        
+        return new BookResource($books);
     }
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\{User, Book};
@@ -159,5 +158,20 @@ class BookTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJson(['data' => ['deleted' => true]]);
+    }
+
+    /**
+     * Search book test.
+     *
+     * @return void
+     */
+    public function testApiBookSearch(): void
+    {
+        $this->withoutExceptionHandling();
+
+        $books = Book::factory()->count(10)->create();
+        $response = $this->getJson(route('books.search', ['s' => $books[0]->title]));
+        
+        $response->assertStatus(200);
     }
 }

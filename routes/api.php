@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\{UserController, BookController};
+use App\Http\Controllers\API\{UserController, BookController, UserBookController};
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +18,9 @@ use App\Http\Controllers\API\{UserController, BookController};
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {return $request->user();});
 
 Route::apiResource('users', UserController::class);
+Route::get('books/search', [BookController::class, 'search'])->name('books.search');
 Route::apiResource('books', BookController::class);
+// Route::resource('users.books', UserBookController::class);
+Route::get('/users/{user}/books', [UserBookController::class, 'index'])->name('users.books.index');
+Route::get('/users/{user}/books/{book}/attach', [UserBookController::class, 'attach'])->name('users.books.attach');
+Route::get('/users/{user}/books/{book}/detach', [UserBookController::class, 'detach'])->name('users.books.detach');
