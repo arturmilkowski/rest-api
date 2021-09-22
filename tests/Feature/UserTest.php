@@ -9,7 +9,7 @@ use Tests\TestCase;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\{User, Book};
 
-class ExampleTest extends TestCase
+class UserTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -21,7 +21,8 @@ class ExampleTest extends TestCase
     public function testUserCanBeInstantiated(): void
     {
         $user = User::factory()->make();
-        
+        $this->actingAs($user);
+
         $this->assertInstanceOf(User::class, $user);
     }
 
@@ -35,7 +36,8 @@ class ExampleTest extends TestCase
         $user = User::factory()
             ->has(Book::factory()->count(3))
             ->create();
-        
+        $this->actingAs($user);
+
         $this->assertInstanceOf(Collection::class, $user->books);
     }
 
@@ -51,7 +53,8 @@ class ExampleTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        User::factory()->count(3)->create();
+        $users = User::factory()->count(3)->create();
+        $response = $this->actingAs($users[0]);
         $response = $this->getJson(route('users.index'));
 
         $response->assertStatus(200);
@@ -67,6 +70,7 @@ class ExampleTest extends TestCase
         $this->withoutExceptionHandling();
 
         $user = User::factory()->make();
+        $response = $this->actingAs($user);
         $user->makeVisible(['password']);
         $response = $this->postJson(route('users.store'), $user->toArray());
         
@@ -97,6 +101,7 @@ class ExampleTest extends TestCase
         $this->withoutExceptionHandling();
 
         $user = User::factory()->create();
+        $response = $this->actingAs($user);
         $response = $this->getJson(route('users.show', $user));
 
         $response->assertStatus(200);
@@ -123,6 +128,7 @@ class ExampleTest extends TestCase
 
         $user = User::factory()->create();
         $user1 = User::factory()->make();
+        $response = $this->actingAs($user);
         $response = $this->putJson(
             route('users.update', $user),
             $user1->toArray()
@@ -154,6 +160,7 @@ class ExampleTest extends TestCase
         $this->withoutExceptionHandling();
 
         $user = User::factory()->create();
+        $response = $this->actingAs($user);
         $response = $this->deleteJson(route('users.destroy', $user));
 
         $response->assertStatus(200);

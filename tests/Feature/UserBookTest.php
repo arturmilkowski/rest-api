@@ -26,6 +26,7 @@ class UserBookTest extends TestCase
         $users = User::factory(3)
             ->has(Book::factory()->count(3))
             ->create();
+            $response = $this->actingAs($users[0]);
         $response = $this->getJson(route('users.books.index', $users[0]));
 
         $response->assertStatus(200);
@@ -42,6 +43,7 @@ class UserBookTest extends TestCase
 
         $user = User::factory()->create();
         $book = Book::factory()->create();
+        $response = $this->actingAs($user);
         $response = $this->getJson(route('users.books.attach', [$user, $book]));
         
         $response->assertStatus(200)->assertJson(['data' => ['success' => true]]);
@@ -58,6 +60,7 @@ class UserBookTest extends TestCase
 
         $user = User::factory()->create();
         $book = Book::factory()->create();
+        $response = $this->actingAs($user);
         $response = $this->getJson(route('users.books.detach', [$user, $book]));
 
         $response->assertStatus(200)->assertJson(['data' => ['success' => true]]);

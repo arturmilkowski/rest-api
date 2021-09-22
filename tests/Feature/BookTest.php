@@ -54,6 +54,8 @@ class BookTest extends TestCase
         $this->withoutExceptionHandling();
 
         Book::factory()->count(3)->create();
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
         $response = $this->getJson(route('books.index'));
 
         $response->assertStatus(200);
@@ -69,6 +71,8 @@ class BookTest extends TestCase
         $this->withoutExceptionHandling();
 
         $book = Book::factory()->make();
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
         $response = $this->postJson(route('books.store'), $book->toArray());
         
         $response
@@ -97,6 +101,8 @@ class BookTest extends TestCase
         $this->withoutExceptionHandling();
 
         $book = Book::factory()->create();
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
         $response = $this->getJson(route('books.show', $book));
 
         $response->assertStatus(200);
@@ -123,6 +129,8 @@ class BookTest extends TestCase
 
         $book = Book::factory()->create();
         $book1 = Book::factory()->make();
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
         $response = $this->putJson(
             route('books.update', $book),
             $book1->toArray()
@@ -154,6 +162,8 @@ class BookTest extends TestCase
         $this->withoutExceptionHandling();
 
         $book = Book::factory()->create();
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
         $response = $this->deleteJson(route('books.destroy', $book));
 
         $response->assertStatus(200);
@@ -170,6 +180,8 @@ class BookTest extends TestCase
         $this->withoutExceptionHandling();
 
         $books = Book::factory()->count(10)->create();
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
         $response = $this->getJson(route('books.search', ['s' => $books[0]->title]));
         
         $response->assertStatus(200);
